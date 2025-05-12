@@ -64,4 +64,3 @@
 git clone https://github.com/ShikharPandey123/Job-Application-MERN.git
 cd job-application
 
-Deployed URL : https://job-application-mern-1.onrender.com/
