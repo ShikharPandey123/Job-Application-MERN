@@ -13,7 +13,7 @@ connectToDb();
 app.use(express.json());
 
 app.use(cors({
-  origin: ["http://localhost:5173/","https://job-application-mern-1.onrender.com/"],
+  origin: ["http://localhost:5173/","https://job-application-mern-1.onrender.com/","http://127.0.0.1:5173/"],
   credentials: true,
 }));
 
