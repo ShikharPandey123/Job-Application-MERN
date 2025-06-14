@@ -8,21 +8,12 @@ const port = process.env.PORT || 3000;
 const userRouter = require("./routes/userRouter");
 const cors = require("cors");
 
-const allowedOrigins = [
-  "http://localhost:5173",
-  "https://job-application-mern-1.onrender.com/"
-];
-
 app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
+  origin: ["http://localhost:5173","https://job-application-mern-1.onrender.com"],
   credentials: true
 }));
+
+
 app.use(express.json());
 connectToDb();
 
