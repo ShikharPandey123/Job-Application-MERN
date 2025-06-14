@@ -51,6 +51,7 @@ export default function SignupPage() {
         navigate("/");
       }
     } catch (error) {
+      console.log(error)
       alert("Something went wrong during signup. Please try again.");
       console.error("Signup Error:", error);
     }
