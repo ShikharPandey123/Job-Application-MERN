@@ -11,6 +11,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Card, CardContent } from "@/components/ui/card";
+import { toast } from "react-toastify";
 
 export default function UploadResumePage() {
   const [formData, setFormData] = useState({
@@ -70,7 +71,7 @@ export default function UploadResumePage() {
     const token = localStorage.getItem("token");
 
     try {
-      const response = await fetch("http://localhost:4000/user/apply_job", {
+      const response = await fetch("https://job-application-mern-1-mmdc.onrender.com/user/apply_job", {
         method: "POST",
         body: data,
         headers: {
@@ -79,18 +80,30 @@ export default function UploadResumePage() {
       });
 
       if (response.ok) {
-        alert("Resume uploaded successfully!");
+        toast.success("Resume uploaded successfully!",
+          {
+            toastId: "upload-success",
+          }
+        );
         localStorage.removeItem("selectedJob"); // 
       } 
       
       else {
         const result = await response.json();
-        alert(result.error || "Upload failed. Please try again.");
+        toast.error(result.error || "Upload failed. Please try again.",
+          {
+            toastId: "upload-error",
+          }
+        );
       }
       
     } catch (err) {
       console.error(err);
-      alert("An error occurred. Please try again.");
+      toast.error("An error occurred. Please try again.",
+        {
+          toastId: "upload-error",
+        }
+      );
     }
   };
 

@@ -20,7 +20,7 @@ export default function AdminDashboard() {
     try {
       const token = localStorage.getItem("token");
 
-      const response = await fetch("http://localhost:4000/user/getApplicants", {
+      const response = await fetch("https://job-application-mern-1-mmdc.onrender.com/user/getApplicants", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -46,7 +46,7 @@ export default function AdminDashboard() {
 
     try {
       const token = localStorage.getItem("token");
-      const url = `http://localhost:4000/user/${decision}/${id}`;
+      const url = `https://job-application-mern-1-mmdc.onrender.com/user/${decision}/${id}`;
 
       const response = await fetch(url, {
         method: "PATCH",

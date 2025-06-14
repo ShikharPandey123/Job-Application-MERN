@@ -20,7 +20,7 @@ export default function SignupPage() {
     }
 
     try {
-      const response = await fetch("http://localhost:4000/user/register", {
+      const response = await fetch("https://job-application-mern-1-mmdc.onrender.com/user/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
