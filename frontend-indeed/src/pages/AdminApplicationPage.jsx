@@ -10,7 +10,7 @@ export default function AdminDashboard() {
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
     if (!user || user.role !== "admin") {
-      navigate("/login");
+      navigate("/Login");
       return;
     }
     fetchApplications();
@@ -20,7 +20,7 @@ export default function AdminDashboard() {
     try {
       const token = localStorage.getItem("token");
 
-      const response = await fetch("https://job-application-mern-1-mmdc.onrender.com/user/getApplicants", {
+      const response = await fetch("http://localhost:5000/user/applications", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -43,10 +43,41 @@ export default function AdminDashboard() {
       `Are you sure you want to ${decision} this application?`
     );
     if (!confirmation) return;
+    if (decision === "accepted") {
+      try {
+      const token = localStorage.getItem("token");
+      const jobPost = {
+        title: "Frontend Developer",
+        description: "Looking for a skilled frontend developer...",
+        requirements: ["HTML", "CSS", "JavaScript"],
+        role: "developer",
+        location: "Remote",
+        salaryRange: "$60k - $80k",
+        deadline: "2025-06-01",
+      };
 
+      const res = await fetch("http://localhost:5000/api/jobposts/create", {
+        method: "POST",
+        headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(jobPost),
+      });
+
+      if (!res.ok) {
+        const error = await res.json();
+        throw new Error(error.msg || "Failed to create job post");
+      }
+      // Optionally, you can show a success message or update UI
+      } catch (err) {
+      console.error("Error creating job post:", err.message);
+      alert("Error creating job post.");
+      }
+    }
     try {
       const token = localStorage.getItem("token");
-      const url = `https://job-application-mern-1-mmdc.onrender.com/user/${decision}/${id}`;
+      const url = `http://localhost:5000/user/${decision}/${id}`;
 
       const response = await fetch(url, {
         method: "PATCH",

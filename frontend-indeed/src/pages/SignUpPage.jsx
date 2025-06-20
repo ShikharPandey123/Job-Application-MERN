@@ -20,7 +20,7 @@ export default function SignupPage() {
     }
 
     try {
-      const response = await fetch("https://job-application-mern-1-mmdc.onrender.com/user/register", {
+      const response = await fetch("http://localhost:5000/user/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -29,7 +29,7 @@ export default function SignupPage() {
           name,
           email,
           password,
-          role: isAdmin ? "admin" : "user",
+          role: isAdmin ? "admin" : "employee",
         }),
       });
 
@@ -46,9 +46,9 @@ export default function SignupPage() {
       );
 
       if (data.user.role === "admin") {
-        navigate("/admin-dashboard");
+        navigate("/Login");
       } else {
-        navigate("/");
+        navigate("/Login");
       }
     } catch (error) {
       console.log(error)

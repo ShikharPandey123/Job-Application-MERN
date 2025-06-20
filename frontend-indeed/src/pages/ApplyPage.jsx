@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/select";
 import { Card, CardContent } from "@/components/ui/card";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 export default function UploadResumePage() {
   const [formData, setFormData] = useState({
@@ -23,6 +24,8 @@ export default function UploadResumePage() {
   });
 
   const [jobDetails, setJobDetails] = useState(null);
+
+  const navigate= useNavigate();
 
   // Load job details from localStorage on mount
   useEffect(() => {
@@ -71,7 +74,7 @@ export default function UploadResumePage() {
     const token = localStorage.getItem("token");
 
     try {
-      const response = await fetch("https://job-application-mern-1-mmdc.onrender.com/user/apply_job", {
+      const response = await fetch("http://localhost:5000/user/apply_job", {
         method: "POST",
         body: data,
         headers: {
@@ -80,12 +83,9 @@ export default function UploadResumePage() {
       });
 
       if (response.ok) {
-        toast.success("Resume uploaded successfully!",
-          {
-            toastId: "upload-success",
-          }
-        );
+        alert("Job Application Successful.")
         localStorage.removeItem("selectedJob"); // 
+        navigate("/");
       } 
       
       else {

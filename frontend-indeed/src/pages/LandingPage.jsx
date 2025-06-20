@@ -47,7 +47,15 @@ export default function HomePage() {
 
   const fetchJobs = async () => {
     try {
-      // Fetch from API if needed
+      const response = await fetch(
+        "http://localhost:5000/user/api/jobs/",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       setJobs(fallbackJobs);
     } catch (error) {
       console.error("Failed to fetch jobs:", error);

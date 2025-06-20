@@ -13,7 +13,7 @@ export default function LoginPage() {
     e.preventDefault();
 
     try {
-      const response = await fetch("https://job-application-mern-1-mmdc.onrender.com/user/login", {
+      const response = await fetch("http://localhost:5000/user/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
@@ -21,7 +21,7 @@ export default function LoginPage() {
 
       const data = await response.json();
 
-      if (data.success) {
+      if (response.status == 200) {
         // ✅ Save user info and token
         localStorage.setItem(
           "user",

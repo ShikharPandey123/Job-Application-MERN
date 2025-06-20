@@ -10,7 +10,7 @@ export default function ProfilePage() {
       if (!token) return;
 
       try {
-        const response = await fetch("https://job-application-mern-1-mmdc.onrender.com/user/profile", {
+        const response = await fetch("http://localhost:5000/user/profile", {
           method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,
